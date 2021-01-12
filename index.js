@@ -441,7 +441,7 @@ socket_corresponder = io.nsps['/'].connected[String(socket.id)]
                 acolor = colors[random_number]
                 minimum = synced_game_time - 15
                 if(Math.floor((Math.random()*10) + 1)>9) {
-                	minimum = synced_game_time - 45
+                	minimum = synced_game_time - 52
                 }
                 if(Math.floor((Math.random()*10) + 1)>6) {
                 	minimum = synced_game_time - 30
