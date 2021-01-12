@@ -80,18 +80,19 @@ io.on('connection', (socket) => {
                 
                 if(random_score_determiner > 10) {
                     ex_scores = [1255, 945, 690, 320, 485, 695, 1005, 885, 870, 0, 815, 910, 700, 710, 715, 720, 725, 730, 735, 770, 780, 650, 665, 675, 680, 330,340,335,360,370,375,280,285,290,275,265,305,310,0,0,0]
-                    round_present = 3
+                    round_present = 4
+                    // console.log()
                 } else if(random_score_determiner > 7) {
                     console.log('ROUND PRESENT is 2')
                     ex_scores = [945, 930, 830, 820, 825, 815, 795, 785, 765, 770, 760, 720, 730, 770, 650, 665, 675, 680, 440,415,420,450,430,405,400,395,390,385,380,375,370,365,360,355,350,345,340,325,310,315,320,305,300,285,290,285,280,265,270, 0,0,0,0,0]
-                    round_present = 2
+                    round_present = 3
                 } else {
                     ex_scores = [350,345,340,335,330,325,320,315,310,305,300,295,290,285,280,275,270,265,260,255,250,245,240,235,230,225,220,210,205,200,195,190,185,180,175,170,205,0,0,0,0,0]
-                    round_present = 1                   
+                    round_present = 2                   
                 }
                 if((Math.floor(Math.random() * (11 - 1 + 1)) + 1) == 10) {
                     ex_scores = [0,0,0,0,0,0,0]
-                    round_present = 0                   	
+                    round_present = 1                	
                 }
                 ranscore = ex_scores[Math.floor(Math.random() * ex_scores.length)];
                 if(Math.floor((Math.random()*10) + 1)>6) {
