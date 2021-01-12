@@ -33,7 +33,7 @@ io.on('connection', (socket) => {
             lines = content.split('\n')
             // console.log(content)
             // console.log(lines)
-            return(lines[parseInt(Math.floor(Math.random() * (lines.length - 1 + 1)) + 1)].substring(0,13))
+            return(lines[parseInt(Math.floor(Math.random() * (lines.length - 1 + 1)) + 1)].substring(0,11))
         }
         function weightedRandom(max, numDice) {
             let num = 0;
@@ -423,7 +423,7 @@ socket_corresponder = io.nsps['/'].connected[String(socket.id)]
             lines = content.split('\n')
             // console.log(content)
             // console.log(lines)
-            return(lines[parseInt(Math.floor(Math.random() * (lines.length - 1 + 1)) + 1)].substring(0,13))
+            return(lines[parseInt(Math.floor(Math.random() * (lines.length - 1 + 1)) + 1)].substring(0,11))
         }
         console.log('finished')
         socket.currentplayers = currentplayers
