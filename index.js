@@ -76,7 +76,7 @@ io.on('connection', (socket) => {
                 colorslength = colors.length-1
                 random_number = Math.floor(Math.random() * (colorslength - 0 + 1)) + 0
                 acolor = colors[random_number]
-                minimum = synced_game_time - 15
+                minimum = synced_game_time - 25
                 
                 if(random_score_determiner > 10) {
                     ex_scores = [1255, 945, 690, 320, 485, 695, 1005, 885, 870, 0, 815, 910, 700, 710, 715, 720, 725, 730, 735, 770, 780, 650, 665, 675, 680, 330,340,335,360,370,375,280,285,290,275,265,305,310,0,0,0]
@@ -412,6 +412,12 @@ socket_corresponder = io.nsps['/'].connected[String(socket.id)]
         for(key in currentplayers) {
             currentplayers[key][0] = 0
             if(String(key)!=String(socket.username)) {
+            	rantime = Math.floor((Math.random()*10) + 1)
+            	if(rantime > 6) {
+            		minimum = 12
+            	} else {
+            		minimum = 34
+            	}
                 currentplayers[key][1] = Math.floor(Math.random() * (65 - minimum + 1)) + minimum
                 currentplayers[key][2] = generateGuess();
                 currentplayers[key][5] = ""
