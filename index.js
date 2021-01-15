@@ -63,7 +63,7 @@ io.on('connection', (socket) => {
         // random_number = Math.floor(Math.random() * (colors.length - 0 + 1)) + 0
         // acolor = colors[random_number]
         currentplayers[data["username"]] = [0,"","",0,"red",0,1];
-        numofplayers = parseInt(Math.random() * (5 - 3) + 3);
+        numofplayers = parseInt(Math.random() * (4 - 2) + 2);
         console.log('NOP: ' + String(numofplayers))
         random_score_determiner = Math.floor(Math.random() * (11 - 1 + 1)) + 1
         synced_game_time = Math.floor(Math.random() * (55 - 30 + 1)) + 30
@@ -95,7 +95,8 @@ io.on('connection', (socket) => {
                     round_present = 1                	
                 }
                 ranscore = ex_scores[Math.floor(Math.random() * ex_scores.length)];
-                if(Math.floor((Math.random()*10) + 1)>6) {
+                rantime = Math.floor((Math.random()*11) + 1)
+                if(rantime > 6) {
                 	minimum = synced_game_time - 30
                 }
                 currentplayers[makedid] = [0,Math.floor(Math.random() * (synced_game_time - minimum + 1)) + minimum,randomLatLon, ranscore,acolor,0];
@@ -440,11 +441,11 @@ socket_corresponder = io.nsps['/'].connected[String(socket.id)]
                 random_number = Math.floor(Math.random() * (colorslength - 0 + 1)) + 0
                 acolor = colors[random_number]
                 minimum = synced_game_time - 15
-                if(Math.floor((Math.random()*10) + 1)>9) {
-                	minimum = synced_game_time - 52
-                }
-                if(Math.floor((Math.random()*10) + 1)>6) {
+                rantime = Math.floor((Math.random()*10) + 1)
+                if(rantime>9) {
                 	minimum = synced_game_time - 30
+                } else if(rantime > 6) {
+                	minimum = synced_game_time - 51
                 }
                 ranscore = 0
                 makedid = makeid(6)
@@ -476,31 +477,35 @@ socket_corresponder = io.nsps['/'].connected[String(socket.id)]
             nop: nop
         })
         console.log('iterate me')
-        console.log(iterate_me)
-        console.log(iterate_me.length)
-        console.log('ABC BEFORE THE EMIT WILL BE SENT TO:')
-        console.log(socket.id)
-        console.log(iterate_me)
-        for(let y=0;y<iterate_me.length;y++) {
-                console.log('iter count: ' + String(y))
-                if(parseInt(iterate_me[y][2]) < 60000) {
-                    console.log('guess2')
+        function next_dotimeout(iterate_me, y) {
                     timeouts.push(setTimeout(function() {
-                    	try {
                         console.log(y)
+                        console.log('y is above')
+                        console.log(iterate_me)
                         console.log(iterate_me[y][0])
                         console.log(iterate_me[y][1])
-                        console.log('CBA THE EMIT WILL BE SENT TO:')
-                        console.log(socket.id)
+                        console.log('RIGHT BEFORE CREATE_ROOM GUESS EMIT')
                         io.to(socket.id).emit('guess',{
                             username: iterate_me[y][0],
                             coordinates: iterate_me[y][1]
                         })
-                    	} catch(err) {
-                    		console.log(err)
-                    	}
                     }, parseInt(iterate_me[y][2])))
+        }
+        for(let y=0;y<iterate_me.length;y++) {
+                try {
+                console.log('iter count: ' + String(y))
+                if(parseInt(iterate_me[y][2]) < synced_game_time*1000) {
+                    try {
+                    next_dotimeout(iterate_me, y);
+                    console.log('guess2')
+                    } catch(err) {
+                        console.log('here is the error')
+                        console.log(err)
+                    }
                 }   
+                } catch(err) {
+                    console.log(err)
+                }
         }
         console.log('NEXT ROUND RAN | FINISHED')
     })
