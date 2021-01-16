@@ -125,7 +125,7 @@ io.on('connection', (socket) => {
                 synced_game_time: synced_game_time,
                 round_present: round_present
             })  
-        }, 1000);   
+        }, Math.floor(Math.random() * (15 - 5 + 1)) + 5);   
         // previously: Math.floor(Math.random() * (8000 - 15000 + 1)) + 15000)
         console.log('ITERATE THROUGH CURRENT PLAYERS BELOW')
         iterate_me = []
@@ -413,12 +413,13 @@ socket_corresponder = io.nsps['/'].connected[String(socket.id)]
             currentplayers[key][0] = 0
             if(String(key)!=String(socket.username)) {
             	rantime = Math.floor((Math.random()*10) + 1)
+            	maximum = 67
             	if(rantime > 6) {
-            		minimum = 12
+            		minimum = 10
             	} else {
             		minimum = 34
             	}
-                currentplayers[key][1] = Math.floor(Math.random() * (65 - minimum + 1)) + minimum
+                currentplayers[key][1] = Math.floor(Math.random() * (maximum - minimum + 1)) + minimum
                 currentplayers[key][2] = generateGuess();
                 currentplayers[key][5] = ""
             } else {
