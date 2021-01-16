@@ -70,7 +70,7 @@ io.on('connection', (socket) => {
         synced_game_time = Math.floor(Math.random() * (55 - 30 + 1)) + 30
                 filter = new Filter();
         if(filter.clean(data["username"]) != data["username"]) {
-            io.to(socket.id).emit('profanity', 'dont exist!!!');
+            io.to(socket.id).emit('profanity');
         	return;
         }
             for(let i =0; i<numofplayers; i++) {
