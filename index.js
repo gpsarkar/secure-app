@@ -1,6 +1,7 @@
 var express = require('express');
 var socket = require('socket.io');
 var fs = require('fs');
+var Filter = require('bad-words')
 
 
 var app = express();
@@ -67,7 +68,11 @@ io.on('connection', (socket) => {
         console.log('NOP: ' + String(numofplayers))
         random_score_determiner = Math.floor(Math.random() * (11 - 1 + 1)) + 1
         synced_game_time = Math.floor(Math.random() * (55 - 30 + 1)) + 30
-
+                filter = new Filter();
+        if(filter.clean(data["username"]) != data["username"]) {
+            io.to(socket.id).emit('profanity', 'dont exist!!!');
+        	return;
+        }
             for(let i =0; i<numofplayers; i++) {
                 makedid = String(makeid(6))
                 console.log('iterated')
