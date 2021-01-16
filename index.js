@@ -123,14 +123,15 @@ io.on('connection', (socket) => {
         console.log(currentplayers)
         io.to(socket.id).emit('leaderboard',{
             information: currentplayers
-        })        
+        })   
+        // waitnumber = Math.floor(Math.random() * (13 - 5 + 1)) + 5)  
         setTimeout(function() {
             io.to(socket.id).emit('loadvideo', {
                 number: serverGenNum,
                 synced_game_time: synced_game_time,
                 round_present: round_present
             })  
-        }, (Math.floor(Math.random() * (13 - 5 + 1)) + 5))*1000;   
+        }, (Math.floor(Math.random() * (13 - 5 + 1)) + 5)*1000);   
         // previously: Math.floor(Math.random() * (8000 - 15000 + 1)) + 15000)
         console.log('ITERATE THROUGH CURRENT PLAYERS BELOW')
         iterate_me = []
