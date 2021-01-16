@@ -17,11 +17,18 @@
   },
   "homepage": "https://github.com/iamshaunjp/websockets-playlist#readme",
   "dependencies": {
+    "bad-words": "^3.0.4",
     "cors": "^2.8.5",
     "express": "^4.17.1",
-    "socket.io": "^2.2.0"
+    "mongodb": "^3.6.3",
+    "mongoose": "^5.11.10",
+    "redis": "^3.0.2",
+    "socket.io": "^2.3.0"
   },
   "engines": {
     "node": "12.x"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
   }
 }
