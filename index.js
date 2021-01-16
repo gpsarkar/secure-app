@@ -34,7 +34,7 @@ io.on('connection', (socket) => {
             lines = content.split('\n')
             // console.log(content)
             // console.log(lines)
-            return(lines[parseInt(Math.floor(Math.random() * (lines.length - 1 + 1)) + 1)].substring(0,11))
+            return(lines[parseInt(Math.floor(Math.random() * (lines.length - 1 + 1)) + 1)].substring(0,10))
         }
         function weightedRandom(max, numDice) {
             let num = 0;
