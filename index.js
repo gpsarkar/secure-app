@@ -28,7 +28,9 @@ io.on('connection', (socket) => {
     var examples = []
     // var finalusername;
     socket.on('create_room', function(data) {
+    	try {
             finalusername = ""
+    	
         function makeid(length) {
             content = fs.readFileSync('usernames.txt', { encoding: 'utf8' });
             lines = content.split('\n')
@@ -227,6 +229,9 @@ io.on('connection', (socket) => {
         //             console.log(err)
         //         }
         // }
+    } catch(err) {
+    	console.log(err)
+    }
     })
     socket.on('guess-check', function(data) {
         console.log('guess check function')
@@ -245,6 +250,7 @@ io.on('connection', (socket) => {
         console.log(socket_corresponder.currentplayers)
     })
     socket.on('finished-guessing', function(data) {
+    	try {
         if(data['bypass'] == true) {
 socket_corresponder = io.nsps['/'].connected[String(socket.id)]
         console.log(socket_corresponder.currentplayers)
@@ -370,8 +376,12 @@ socket_corresponder = io.nsps['/'].connected[String(socket.id)]
         }
         timeouts = [];
         }, synced_game_time * 1000 + 1000))
+    } catch(err) {
+
+    } 
     })
     socket.on('next_round', function(data) {
+    	try {
         console.log('NEXT ROUND RAN | STARTED')
         socket_corresponder = io.nsps['/'].connected[String(socket.id)]
         serverGenNum2 = Math.floor(Math.random() * usa_lst.length);
@@ -521,15 +531,23 @@ socket_corresponder = io.nsps['/'].connected[String(socket.id)]
                 }
         }
         console.log('NEXT ROUND RAN | FINISHED')
+    	} catch(err) {
+    		console.log(err)
+    	}
     })
     socket.on('disconnect', function() {
+    	try {
         for (var i = 0; i < timeouts.length; i++) {
             clearTimeout(timeouts[i]);
         }
         console.log('timeouts cleared on disconnect')
         timeouts = [];
+    	} catch(err) {
+    		console.log(err)
+    	}
    });
     socket.on('load-podium', function() {
+    	try {
             socket_corresponder = io.nsps['/'].connected[String(socket.id)]
             currentplayers = socket_corresponder.currentplayers
             socket.emit('load-podium', {
@@ -537,6 +555,9 @@ socket_corresponder = io.nsps['/'].connected[String(socket.id)]
                 username: socket_corresponder.username
             })
             socket.disconnect('unauthorized');
+        } catch(err) {
+        	console.log(err)
+        }
    });
 });
 
