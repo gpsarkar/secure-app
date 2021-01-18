@@ -28,9 +28,7 @@ io.on('connection', (socket) => {
     var examples = []
     // var finalusername;
     socket.on('create_room', function(data) {
-    	try {
             finalusername = ""
-    	
         function makeid(length) {
             content = fs.readFileSync('usernames.txt', { encoding: 'utf8' });
             lines = content.split('\n')
@@ -233,9 +231,6 @@ io.on('connection', (socket) => {
         //             console.log(err)
         //         }
         // }
-    } catch(err) {
-    	console.log(err)
-    }
     })
     socket.on('guess-check', function(data) {
         console.log('guess check function')
@@ -254,7 +249,6 @@ io.on('connection', (socket) => {
         console.log(socket_corresponder.currentplayers)
     })
     socket.on('finished-guessing', function(data) {
-    	try {
         if(data['bypass'] == true) {
 socket_corresponder = io.nsps['/'].connected[String(socket.id)]
         console.log(socket_corresponder.currentplayers)
@@ -380,12 +374,8 @@ socket_corresponder = io.nsps['/'].connected[String(socket.id)]
         }
         timeouts = [];
         }, synced_game_time * 1000 + 1000))
-    } catch(err) {
-
-    } 
     })
     socket.on('next_round', function(data) {
-    	try {
         console.log('NEXT ROUND RAN | STARTED')
         socket_corresponder = io.nsps['/'].connected[String(socket.id)]
         serverGenNum2 = Math.floor(Math.random() * usa_lst.length);
@@ -395,11 +385,9 @@ socket_corresponder = io.nsps['/'].connected[String(socket.id)]
         } else {
         	guess_lst = [[40.74361546275168,-73.98742675781251],[40.773261878622634,-73.95584106445314],[40.71968064517243,-74.07394409179689],[40.69365477446245,-73.95103454589845],[41.72213058512578,-74.04785156250001],[42.61779143282346,-73.71826171875001],[35.889050079360935,-85.25390625000001],[28.14950321154457,-81.91406250000001],[37.77071473849611,-122.44537353515626],[51.51216124955517,-0.12153625488281251],[51.51686166794059,-0.09887695312500001],[51.503186376638006,-0.11192321777343751],[51.51087923308819,-0.13183593750000003],[40.724884598773755,-73.99154663085939],[40.80133575979201,-73.94485473632814]]
         }
-        console.log(guess_lst)
         function generateGuess() {
             console.log('THIS FUNC RAN')
             rannum_guesslst = Math.floor(Math.random() * guess_lst.length)
-            console.log(rannum_guesslst)
             guess_coord = guess_lst[rannum_guesslst];
             long = guess_coord[1]
             long = (long % 360 + 540) % 360 - 180
@@ -458,7 +446,7 @@ socket_corresponder = io.nsps['/'].connected[String(socket.id)]
             lines = content.split('\n')
             // console.log(content)
             // console.log(lines)
-            return(lines[parseInt(Math.floor(Math.random() * (lines.length - 1 + 1)) + 1)].substring(0,10))
+            return(lines[parseInt(Math.floor(Math.random() * (lines.length - 1 + 1)) + 1)].substring(0,11))
         }
         console.log('finished')
         socket.currentplayers = currentplayers
@@ -541,23 +529,15 @@ socket_corresponder = io.nsps['/'].connected[String(socket.id)]
                 }
         }
         console.log('NEXT ROUND RAN | FINISHED')
-    	} catch(err) {
-    		console.log(err)
-    	}
     })
     socket.on('disconnect', function() {
-    	try {
         for (var i = 0; i < timeouts.length; i++) {
             clearTimeout(timeouts[i]);
         }
         console.log('timeouts cleared on disconnect')
         timeouts = [];
-    	} catch(err) {
-    		console.log(err)
-    	}
    });
     socket.on('load-podium', function() {
-    	try {
             socket_corresponder = io.nsps['/'].connected[String(socket.id)]
             currentplayers = socket_corresponder.currentplayers
             socket.emit('load-podium', {
@@ -565,9 +545,6 @@ socket_corresponder = io.nsps['/'].connected[String(socket.id)]
                 username: socket_corresponder.username
             })
             socket.disconnect('unauthorized');
-        } catch(err) {
-        	console.log(err)
-        }
    });
 });
 
