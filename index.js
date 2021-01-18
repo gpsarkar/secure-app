@@ -446,7 +446,7 @@ socket_corresponder = io.nsps['/'].connected[String(socket.id)]
             lines = content.split('\n')
             // console.log(content)
             // console.log(lines)
-            return(lines[parseInt(Math.floor(Math.random() * (lines.length - 1 + 1)) + 1)].substring(0,11))
+            return(lines[parseInt(Math.floor(Math.random() * (lines.length - 1 + 1)) + 1)].substring(0,10))
         }
         console.log('finished')
         socket.currentplayers = currentplayers
