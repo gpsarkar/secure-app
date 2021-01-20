@@ -71,7 +71,7 @@ io.on('connection', (socket) => {
         numofplayers = parseInt(Math.random() * (4 - 2) + 2);
         console.log('NOP: ' + String(numofplayers))
         random_score_determiner = Math.floor(Math.random() * (11 - 1 + 1)) + 1
-        synced_game_time = Math.floor(Math.random() * (55 - 30 + 1)) + 30
+        synced_game_time = 60
                 filter = new Filter();
         if(filter.clean(data["username"]) != data["username"]) {
             io.to(socket.id).emit('profanity');
@@ -128,14 +128,17 @@ io.on('connection', (socket) => {
         io.to(socket.id).emit('leaderboard',{
             information: currentplayers
         })   
-        // waitnumber = Math.floor(Math.random() * (13 - 5 + 1)) + 5)  
+        console.log('synced game:')
+        console.log(synced_game_time)
+        // waitnumber = Math.floor(Math.random() * (13 - 5 + 1)) + 5)
+        extended = (Math.floor(Math.random() * (13 - 5 + 1)) + 5)*1000
         setTimeout(function() {
             io.to(socket.id).emit('loadvideo', {
                 number: serverGenNum,
                 synced_game_time: synced_game_time,
                 round_present: round_present
             })  
-        }, (Math.floor(Math.random() * (13 - 5 + 1)) + 5)*1000);   
+        }, extended);   
         // previously: Math.floor(Math.random() * (8000 - 15000 + 1)) + 15000)
         console.log('ITERATE THROUGH CURRENT PLAYERS BELOW')
         iterate_me = []
@@ -158,7 +161,7 @@ io.on('connection', (socket) => {
         console.log(iterate_me.length)
         console.log('current players1234')
         console.log(currentplayers)
-        function dotimeout(iterate_me, y) {
+        function dotimeout(iterate_me, y, extended_param) {
                     timeouts.push(setTimeout(function() {
                         console.log(y)
                         console.log('y is above')
@@ -170,14 +173,14 @@ io.on('connection', (socket) => {
                             username: iterate_me[y][0],
                             coordinates: iterate_me[y][1]
                         })
-                    }, parseInt(iterate_me[y][2])))
+                    }, parseInt(iterate_me[y][2])+extended_param+4000))
         }
         for(let y=0;y<iterate_me.length;y++) {
                 try {
                 console.log('iter count: ' + String(y))
                 if(parseInt(iterate_me[y][2]) < synced_game_time*1000) {
                     try {
-                    dotimeout(iterate_me, y);
+                    dotimeout(iterate_me, y, extended);
                     console.log('guess2')
                     } catch(err) {
                         console.log('here is the error')
@@ -188,49 +191,7 @@ io.on('connection', (socket) => {
                     console.log(err)
                 }
         }
-        // abasdfasdf--
-        // for (var key in currentplayers) {
-        //     console.log('xyz')
-        //             console.log(key)
-        //             hello = [String(key), currentplayers[key][2]]
-        //             console.log(hello)
-        //             setTimeout(function() {
-        //                             console.log('HELLO:')
-        //                             console.log(hello)
-        //                             io.to(socket.id).emit('guess',{
-        //                                 username: hello[0],
-        //                                 coordinates: hello[1]
-        //                             })                        
-        //             }, currentplayers[key][1]*1000, hello);
-        //             setTimeout((postinsql.bind(this, topicId), )
-        // }
-        // for(let y=0;y<iterate_me.length;y++) {
-        //         try {
-        //         console.log('iter count: ' + String(y))
-        //         if(parseInt(iterate_me[y][2]) < synced_game_time*1000) {
-        //             try {
-        //             console.log('guess2')
-        //             timeouts.push(setTimeout(function() {
-        //                 console.log(y)
-        //                 console.log('y is above')
-        //                 console.log(iterate_me)
-        //                 console.log(iterate_me[y][0])
-        //                 console.log(iterate_me[y][1])
-        //                 console.log('RIGHT BEFORE CREATE_ROOM GUESS EMIT')
-        //                 io.to(socket.id).emit('guess',{
-        //                     username: iterate_me[y][0],
-        //                     coordinates: iterate_me[y][1]
-        //                 })
-        //             }, parseInt(iterate_me[y][2])))
-        //             } catch(err) {
-        //                 console.log('here is the error')
-        //                 console.log(err)
-        //             }
-        //         }   
-        //         } catch(err) {
-        //             console.log(err)
-        //         }
-        // }
+
     })
     socket.on('guess-check', function(data) {
         console.log('guess check function')
@@ -510,7 +471,7 @@ socket_corresponder = io.nsps['/'].connected[String(socket.id)]
                             username: iterate_me[y][0],
                             coordinates: iterate_me[y][1]
                         })
-                    }, parseInt(iterate_me[y][2])))
+                    }, parseInt(iterate_me[y][2])+4000))
         }
         for(let y=0;y<iterate_me.length;y++) {
                 try {
