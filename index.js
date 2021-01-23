@@ -210,6 +210,7 @@ io.on('connection', (socket) => {
         //a console.log(socket_corresponder.currentplayers)
     })
     socket.on('finished-guessing', function(data) {
+    	try {
         if(data['bypass'] == true) {
 socket_corresponder = io.nsps['/'].connected[String(socket.id)]
         //a console.log(socket_corresponder.currentplayers)
@@ -336,8 +337,12 @@ socket_corresponder = io.nsps['/'].connected[String(socket.id)]
         }
         timeouts = [];
         }, synced_game_time * 1000 + 1000))
+    }catch(err){
+    	console.log(err)
+    }
     })
     socket.on('next_round', function(data) {
+    	try {
         //a console.log('NEXT ROUND RAN | STARTED')
         socket_corresponder = io.nsps['/'].connected[String(socket.id)]
         serverGenNum2 = Math.floor(Math.random() * usa_lst.length);
@@ -495,6 +500,9 @@ socket_corresponder = io.nsps['/'].connected[String(socket.id)]
                 }
         }
         //a console.log('NEXT ROUND RAN | FINISHED')
+    	}catch(err){
+    		console.log(err)
+    	}
     })
     socket.on('disconnect', function() {
         for (var i = 0; i < timeouts.length; i++) {
