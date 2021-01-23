@@ -73,8 +73,6 @@ io.on('connection', (socket) => {
         random_score_determiner = Math.floor(Math.random() * (11 - 1 + 1)) + 1
         synced_game_time = 60
                 filter = new Filter({placeholder: 'x'});
-                console.log(filter.clean(data["username"]))
-                console.log(data["username"])
         if(filter.clean(data["username"]) != data["username"]) {
             io.to(socket.id).emit('profanity');
         	return;
@@ -324,7 +322,8 @@ socket_corresponder = io.nsps['/'].connected[String(socket.id)]
                 }
             }
         }
-
+        			console.log('Emit before midgame scoreboard:')
+        			console.log(currentplayers)
                     io.to(socket.id).emit('finished-guessing',{
                         currentplayers: currentplayers,
                         correctLatLon: correctLatLon
