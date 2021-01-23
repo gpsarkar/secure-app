@@ -508,7 +508,7 @@ socket_corresponder = io.nsps['/'].connected[String(socket.id)]
         for (var i = 0; i < timeouts.length; i++) {
             clearTimeout(timeouts[i]);
         }
-        //a console.log('timeouts cleared on disconnect')
+        console.log('timeouts cleared on disconnect')
         timeouts = [];
    });
     socket.on('load-podium', function() {
