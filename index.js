@@ -512,6 +512,7 @@ socket_corresponder = io.nsps['/'].connected[String(socket.id)]
         timeouts = [];
    });
     socket.on('load-podium', function() {
+    		console.log('Podium Loading! Game Over!')
             socket_corresponder = io.nsps['/'].connected[String(socket.id)]
             currentplayers = socket_corresponder.currentplayers
             socket.emit('load-podium', {
