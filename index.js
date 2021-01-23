@@ -375,6 +375,7 @@ socket_corresponder = io.nsps['/'].connected[String(socket.id)]
                         // correctLatLon = usa_lat_lon[parseInt(data["rannum"])]
 
         currentplayers = socket_corresponder.currentplayers
+        try {
         if(currentplayers[socket_corresponder.username][6] == 10) {
             socket.emit('load-podium', {
                 currentplayers: currentplayers,
@@ -383,6 +384,9 @@ socket_corresponder = io.nsps['/'].connected[String(socket.id)]
             socket.disconnect('unauthorized');
             return;
         }
+    	} catch(err) {
+    		console.log(err)
+    	}
         // CBA CBA
         minimum = 34
         for(key in currentplayers) {
