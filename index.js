@@ -72,7 +72,7 @@ io.on('connection', (socket) => {
         //a console.log('NOP: ' + String(numofplayers))
         random_score_determiner = Math.floor(Math.random() * (11 - 1 + 1)) + 1
         synced_game_time = 60
-                filter = new Filter({placeholder: 'x'});
+        filter = new Filter();
         if(filter.clean(data["username"]) != data["username"]) {
             io.to(socket.id).emit('profanity');
         	return;
