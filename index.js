@@ -29,6 +29,7 @@ io.on('connection', (socket) => {
     // var finalusername;
     socket.on('create_room', function(data) {
     	try {
+    		console.log('Room Join!')
             finalusername = ""
         function makeid(length) {
             content = fs.readFileSync('usernames.txt', { encoding: 'utf8' });
