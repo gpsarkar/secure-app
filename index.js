@@ -133,7 +133,7 @@ io.on('connection', (socket) => {
         //a console.log('synced game:')
         //a console.log(synced_game_time)
         // waitnumber = Math.floor(Math.random() * (13 - 5 + 1)) + 5)
-        extended = (Math.floor(Math.random() * (10 - 5 + 1)) + 5)*1000
+        extended = (Math.floor(Math.random() * (9 - 2 + 1)) + 2)*1000
         setTimeout(function() {
             io.to(socket.id).emit('loadvideo', {
                 number: serverGenNum,
